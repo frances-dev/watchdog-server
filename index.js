@@ -106,6 +106,8 @@ client.connect(err => {
             })
     })
 
+
+    
     // Status
     app.patch("/addStatus/:id", (req, res) => {
         const status = req.body.status;
