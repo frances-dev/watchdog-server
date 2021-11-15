@@ -10,7 +10,7 @@ const ObjectId = require('mongodb').ObjectId;
 
 
 const MongoClient = require('mongodb').MongoClient;
-const uri = `mongodb+srv://shahriar49:Liza0174@cluster0.v5isl.mongodb.net/WatchDog?retryWrites=truenpm&w=majority`;
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.v5isl.mongodb.net/${process.env.DB_NAME}?retryWrites=truenpm&w=majority`;
 app.use(bodyParser.json());
 app.use(cors());
 app.use(express.static('services'));
