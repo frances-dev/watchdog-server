@@ -10,7 +10,7 @@ const ObjectId = require('mongodb').ObjectId;
 
 
 const MongoClient = require('mongodb').MongoClient;
-const uri = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.v5isl.mongodb.net/WatchDog?retryWrites=truenpm&w=majority`;
+const uri = `mongodb+srv://shahriar49:Liza0174@cluster0.v5isl.mongodb.net/WatchDog?retryWrites=truenpm&w=majority`;
 app.use(bodyParser.json());
 app.use(cors());
 app.use(express.static('services'));
@@ -107,7 +107,7 @@ client.connect(err => {
     })
 
 
-    
+
     // Status
     app.patch("/addStatus/:id", (req, res) => {
         const status = req.body.status;
