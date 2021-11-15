@@ -22,25 +22,17 @@ client.connect(err => {
     const userServicesCollection = client.db("WatchDog").collection("userServices");
     const reviewCollection = client.db("WatchDog").collection("review");
     const adminCollection = client.db("WatchDog").collection("admin");
+    const statusCollection = client.db("WatchDog").collection("status");
 
     // Uploading Services
     app.post("/addService", (req, res) => {
-        const file = req.files.file;
-        const name = req.body.name;
-        const bed = req.body.bed;
-        const bath = req.body.bath;
+        const img = req.body.img;
+        const title = req.body.title;
+        const desc = req.body.desc;
         const price = req.body.price;
-        const location = req.body.location;
-        const newImg = file.data;
-        const encImg = newImg.toString('base64');
-
-        var image = {
-            contentType: file.mimetype,
-            size: file.size,
-            img: Buffer.from(encImg, 'base64')
-        };
-
-        servicesCollection.insertOne({ name, bed, bath, price, location, image })
+        const spec = req.body.spec;
+        const variation = req.body.variation;
+        servicesCollection.insertOne({ img, title, desc, price, spec, variation })
             .then(result => {
                 res.send(result.insertedCount > 0);
             })
@@ -78,8 +70,6 @@ client.connect(err => {
         const email = req.body.email;
         const service = req.body.service;
         const price = req.body.price;
-
-
         userServicesCollection.insertOne({ name, desc, email, service, price })
             .then(result => {
                 res.send(result.insertedCount > 0);
@@ -97,11 +87,12 @@ client.connect(err => {
 
     // Making Review
     app.post("/review", (req, res) => {
+        const img = req.body.img;
         const name = req.body.name;
-        const desig = req.body.desig;
         const desc = req.body.desc;
-        const img = req.body.photo;
-        reviewCollection.insertOne({ name, desig, desc, img })
+        const desig = req.body.desig;
+        const ratings = req.body.ratings;
+        reviewCollection.insertOne({ img, name, desc, desig, ratings })
             .then(result => {
                 res.send(result.insertedCount > 0);
             })
